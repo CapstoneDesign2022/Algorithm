@@ -52,18 +52,18 @@ std=[] #표준편차
 sum,s,e=0,0,0
 for i in range(len(premium)-1):
 
-        if(e-s < term):
-            sum = sum + premium[e]
-            e+=1
-            if(e-s==term):
-                premium_av.append(sum/term)
-                std.append(numpy.std(premium[s:e]))
-        if(e-s == term):
-            sum = sum-premium[s]+premium[e]
+    if(e-s < term):
+        sum = sum + premium[e]
+        e+=1
+        if(e-s==term):
             premium_av.append(sum/term)
             std.append(numpy.std(premium[s:e]))
-            s+=1
-            e+=1
+    if(e-s == term):
+        sum = sum-premium[s]+premium[e]
+        premium_av.append(sum/term)
+        std.append(numpy.std(premium[s:e]))
+        s+=1
+        e+=1
 
 upper_band=[] #   20일 김프 이평선 값 + ( 20일 동안의 김프 표준편차 값 ) * 2
 lower_band=[] #   20일 김프 이평선 값 - ( 20일 동안의 김프 표준편차 값 ) * 2
@@ -90,5 +90,5 @@ f.close()
 print(len(premium[term-1:]),len(premium_av),len(timestamp))
 
 
-# plt.plot(timestamp[term-1:],premium[term-1:],'r-',timestamp[term-1:],premium_av,'b-',timestamp[term-1:],upper_band,'g-',timestamp[term-1:],lower_band,'g-')
-# plt.show()
+plt.plot(timestamp[term-1:],premium[term-1:],'r-',timestamp[term-1:],premium_av,'b-',timestamp[term-1:],upper_band,'g-',timestamp[term-1:],lower_band,'g-')
+plt.show()
