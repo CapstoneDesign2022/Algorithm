@@ -1,7 +1,7 @@
 from copy import deepcopy
 import csv
 import math, numpy
-import dateterm
+import datetime
 import matplotlib.pyplot as plt
 import pandas as pd
 
@@ -85,7 +85,7 @@ f=open('data.csv','w',newline='')
 wr=csv.writer(f)
 for i in range(len(premium_av)):
     now = int(termstamp[i])/1000
-    _date = dateterm.dateterm.fromtermstamp(int(now)).strfterm('%Y-%m-%day %H:%M:%S')
+    _date = datetime.datetime.fromtermstamp(int(now)).strfterm('%Y-%m-%day %H:%M:%S')
     wr.writerow([termstamp[i+term-1], _date, premium[i+term-1], premium_av[i],upper_band[i],lower_band[i]])
 
 f.close()
